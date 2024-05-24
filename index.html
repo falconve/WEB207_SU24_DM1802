@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <!-- Để sử dụng angularJS ở toàn bộ chương trình thì phải có thuộc 
+  tính ng-app ở thẻ mở body -->
+  <body ng-app="myApp">
+    <header>
+      <!-- place navbar here -->
+    </header>
+    <main>
+      <!-- Để hiện thị hoặc tính toán logic thì phải bỏ vào trong 2 lần
+        dấu đóng mở ngoặc nhọn
+      -->
+      <p>{{5+5}}</p>
+      <!-- Để hiển thị chạy controller
+      sử dụng thuộc tính ng-controller
+      -->
+      <h1 ng-controller="myController">{{welcome}}</h1>
+      <h2 ng-controller="monHoc">Tên môn: {{monHoc.tenMon}}</h2>
+      <h2 ng-controller="monHoc">Lớp: {{monHoc.lop}}</h2>
+
+      <h3 ng-controller="mauSac">{{colorList[0]}}</h3>
+      <h3 ng-controller="mauSac">{{colorList[2]}}</h3>
+      <!-- <h3 ng-controller="mauSac" style="color: {{colorList[1]}}">
+        Đây là màu đỏ
+      </h3> -->
+      <!-- <img ng-controller="danhSachHinhAnh" src="{{imageList[0]}}" alt="" />
+      <img ng-controller="danhSachHinhAnh" src="{{imageList[1]}}" alt="" /> -->
+
+      <!-- ng-bind và {{}} cùng để in dữ liệu từ controller  -->
+      <h6 ng-controller="mauSac" ng-bind="colorList[0]"></h6>
+      <div ng-controller="inDuLieu">
+        <!-- ng-model chỉ sư dụng để in và lấy dữ liệu trong thẻ input -->
+        <input type="text" ng-model="inDuLieu" />
+        <p ng-model="inDuLieu"></p>
+      </div>
+
+      <div ng-controller="tinhTong">
+        <label for="">Nhập số a </label>
+        <input type="number" ng-model="a" />
+
+        <label for="">Nhập số b </label>
+        <input type="number" ng-model="b" />
+
+        <h3>Tổng 2 số: {{a + b}}</h3>
+      </div>
+
+      <div ng-controller="dem">
+        <h2>Đưa chuột vào đây điiiiii</h2>
+        <button ng-mousemove="count = count + 1">{{count}}</button>
+      </div>
+
+      <div ng-controller="tinhChuViHCN">
+        <h1>Tính chu vi HCN</h1>
+        <label for="">Nhập chiều dài: </label>
+        <input type="number" ng-model="chieuDai" />
+
+        <label for="">Nhập chiều rộng: </label>
+        <input type="number" ng-model="chieuRong" />
+
+        <!-- 
+          ng-click dùng để bắt sự kiện người dùng ấn vào nút
+          Muốn thực thi 1 hàm thì phải có dấu () -->
+        <button ng-click="tinhChuVi()">Tính</button>
+        <h3>{{chuVi}}</h3>
+      </div>
+    </main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Lưu ý khi link thư viện angularjs từ CDNJS
+    phải xoá: 
+    - intergrity
+    - crossorigin
+    - referrerpolicy
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+      // Để sử dụng angularJS thì khai báo biến app
+      let app = angular.module("myApp", []);
+
+      // Để viết controller trong angularJS thì phải viết trong 1 hàm
+      function myController($scope) {
+        $scope.welcome = "Welcome AngularJS";
+      }
+
+      // Để sử dụng controller thì sử dụng
+      //app.controller("tên controller", hàm xử lý logic)
+      app.controller("myController", myController);
+
+      // Khai báo một controller là 1 hàm có tên là monHoc
+      function monHoc($scope) {
+        $scope.monHoc = {
+          tenMon: "AngularJS",
+          lop: "WD",
+        };
+      }
+
+      app.controller("monHoc", monHoc);
+
+      // Khai báo một controller là 1 hàm trong hàm này sẽ là 1 mảng
+      function mauSac($scope) {
+        $scope.colorList = ["black", "red", "yellow"];
+      }
+
+      app.controller("mauSac", mauSac);
+
+      function danhSachHinhAnh($scope) {
+        $scope.imageList = [
+          "https://file3.qdnd.vn/data/images/0/2023/05/03/vuhuyen/khanhphan.jpg",
+          "https://didongviet.vn/dchannel/wp-content/uploads/2022/01/cute-didongviet.jpg",
+        ];
+      }
+
+      app.controller("danhSachHinhAnh", danhSachHinhAnh);
+
+      function inDuLieu($scope) {
+        $scope.inDuLieu = "In Du Lieu Su Dung ng-model";
+      }
+
+      app.controller("inDuLieu", inDuLieu);
+
+      function tinhTong($scope) {
+        $scope.a = 0;
+        $scope.b = 0;
+      }
+
+      app.controller("tinhTong", tinhTong);
+
+      function dem($scope) {
+        $scope.count = 0;
+      }
+
+      app.controller("dem", dem);
+
+      function tinhChuViHCN($scope) {
+        $scope.chieuDai = 0;
+        $scope.chieuRong = 0;
+        $scope.chuVi = 0;
+
+        // Hàm tính chu vi hcn dùng để gọi trên ng-click ở view
+        $scope.tinhChuVi = function () {
+          $scope.chuVi = ($scope.chieuDai + $scope.chieuRong) * 2;
+        };
+      }
+
+      app.controller("tinhChuViHCN", tinhChuViHCN);
+    </script>
+  </body>
+</html>
