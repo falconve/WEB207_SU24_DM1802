@@ -20,59 +20,44 @@
 
   <body ng-app="myApp">
     <header>
-      <!-- place navbar here -->
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="./DanhSachSanPham.html"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./ThemSanPham.html"
+                    >Thêm sản phẩm</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
     </header>
     <main>
-        <p ng-controller="controller1">
-            Contoller 1 Text: {{textController1}}
-            <br>
-            Contoller 2 Text: {{textController2}}
-            <br>
-            <p ng-controller="controller2">
-                Contoller 2 Text: {{textController2}} 
-                <br>  
-                <!-- Dữ liệu đc hiển thị ra bởi vì trong 
-                controller1 sử dụng $rootScope -->
-                Contoller 1 Text: {{textController1}} 
-            </p>
-        </p>
-
-        <!-- Biểu thức điều kiện if trong angularJS: ng-if -->
-        <!-- False -->
-        <p ng-if="1 < 0">Sai rồiiii</p>
-         <!-- True -->
-         <p ng-if="1 > 0">Đúng hiện thị đi</p>
-
-
-         <!-- // Điểm > 8 => giỏi
-        // Điểm > 7 => khá 
-        // Điểm từ 5 - 6 => trung bình 
-        // Điểm < 5 => yếu -->
-         <div ng-controller="thongTinSV">
-            <p>Họ tên: {{info.name}}</p>
-            <p>Tuổi: {{info.age}}</p>
-            <p>Địa chỉ: {{info.diaChi}}</p>
-            <p>Điểm: {{info.diem}}</p>
-            <p ng-if="info.diem > 8">Xếp loại: Giỏi</p>
-            <p ng-if="info.diem > 7">Xếp loại: Khá</p>
-            <p ng-if="info.diem < 7 && info.diem > 5">Xếp loại: Trung bình</p>
-            <p ng-if="info.diem < 5">Xếp loại: Yếu</p>
-         </div>
-
-         <!-- 
-            BT: Kiểm tra tài khoản và mật khẩu là admin | admin => đăng nhập thành công
-            Còn lại hiển thị ra đăng nhập thất bại
-        -->
-         <div ng-controller="login">
-            <div ng-if="!isLogin">
-                <label for="">Tên đăng nhập</label>
-                <input type="text">
-                <label for="">Mật khẩu</label>
-                <input type="password">
-                <button ng-click="loginBtn()">Đăng nhập</button>
-             </div>
-             <h3 ng-if="isLogin">Đăng nhập thành công</h3>
-         </div>
+      <div ng-view></div>
     </main>
     <footer>
       <!-- place footer here -->
@@ -89,49 +74,37 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <!-- AngularRoute -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+    <!-- List Controller -->
+    <script src="./controllers/ListController.js"></script>
     <script>
-      let app = angular.module("myApp", []);
-
-      function controller1($scope, $rootScope) {
-        // Để truy cập dữ liệu từ cha xuống con thì sử dụng $rootScope
-        $rootScope.textController1 = "Controller 1";
-      }
-
-      function controller2($scope) {
-        $scope.textController2 = "Controller 2";
-      }
-
-      app.controller("controller1", controller1);
-      app.controller("controller2", controller2);
-
-        // Viết 1 controller hiển thị ra thông tin của sinh viên và xếp loại sinh viên đó 
-        // Thông tin sv gồm: tên, tuổi, địa chỉ, điểm
-      function thongTinSV($scope) {
-        $scope.info = {
-            name: 'Tuan Anh',
-            age: '26',
-            diaChi: 'Hai Phong',
-            diem: '6'
-        }
-      }
-
-      app.controller('thongTinSV', thongTinSV);
-
-      function login($scope) {
-        // Mặc định trạng thái là false bởi vì người dùng chưa đăng nhập
-        $scope.isLogin = false; 
-
-        $scope.loginBtn = function() {
-            // Đổi trạng thái sang true bởi vì lúc này người dùng 
-            // đã nhập tài khoản  mật khẩu và ấn nút đăng nhập
-            $scope.isLogin = true;
-        }
-      }
-
-      app.controller('login', login);
-
-
+      // Thiết lập angularjs và angular route cho ứng dụng của mình
+      let app = angular.module("myApp", ["ngRoute"]);
+      // Biến API_URL lưu đường dẫn API
+      const API_URL = "http://localhost:3000/products";
+      // Cấu hình từng route cho ứng dụng
+      app.config(function ($routeProvider) {
+        // Thiết lập route /list và view tương ứng
+        $routeProvider
+          .when("/list", {
+            // templateUrl để gọi view tương ứng với route
+            templateUrl: "./views/DanhSachSanPham.html",
+            // controller để gọi controller tương ứng với route
+            controller: ListController,
+          })
+          .when("/add", {
+            templateUrl: "./views/ThemSanPham.html",
+          })
+          .when("/detail", {
+            templateUrl: "./views/ChiTietSanPham.html",
+          })
+          .when("/edit", {
+            templateUrl: "./views/SuaSanPham.html",
+          });
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body ng-app="myApp">
+    <header>
+      <!-- place navbar here -->
+    </header>
+    <main>
+        <p ng-controller="controller1">
+            Contoller 1 Text: {{textController1}}
+            <br>
+            Contoller 2 Text: {{textController2}}
+            <br>
+            <p ng-controller="controller2">
+                Contoller 2 Text: {{textController2}} 
+                <br>  
+                <!-- Dữ liệu đc hiển thị ra bởi vì trong 
+                controller1 sử dụng $rootScope -->
+                Contoller 1 Text: {{textController1}} 
+            </p>
+        </p>
+
+        <!-- Biểu thức điều kiện if trong angularJS: ng-if -->
+        <!-- False -->
+        <p ng-if="1 < 0">Sai rồiiii</p>
+         <!-- True -->
+         <p ng-if="1 > 0">Đúng hiện thị đi</p>
+
+
+         <!-- // Điểm > 8 => giỏi
+        // Điểm > 7 => khá 
+        // Điểm từ 5 - 6 => trung bình 
+        // Điểm < 5 => yếu -->
+         <div ng-controller="thongTinSV">
+            <p>Họ tên: {{info.name}}</p>
+            <p>Tuổi: {{info.age}}</p>
+            <p>Địa chỉ: {{info.diaChi}}</p>
+            <p>Điểm: {{info.diem}}</p>
+            <p ng-if="info.diem > 8">Xếp loại: Giỏi</p>
+            <p ng-if="info.diem > 7">Xếp loại: Khá</p>
+            <p ng-if="info.diem < 7 && info.diem > 5">Xếp loại: Trung bình</p>
+            <p ng-if="info.diem < 5">Xếp loại: Yếu</p>
+         </div>
+
+         <!-- 
+            BT: Kiểm tra tài khoản và mật khẩu là admin | admin => đăng nhập thành công
+            Còn lại hiển thị ra đăng nhập thất bại
+        -->
+         <div ng-controller="login">
+            <div ng-if="!isLogin">
+                <label for="">Tên đăng nhập</label>
+                <input type="text">
+                <label for="">Mật khẩu</label>
+                <input type="password">
+                <button ng-click="loginBtn()">Đăng nhập</button>
+             </div>
+             <h3 ng-if="isLogin">Đăng nhập thành công</h3>
+         </div>
+    </main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+      let app = angular.module("myApp", []);
+
+      function controller1($scope, $rootScope) {
+        // Để truy cập dữ liệu từ cha xuống con thì sử dụng $rootScope
+        $rootScope.textController1 = "Controller 1";
+      }
+
+      function controller2($scope) {
+        $scope.textController2 = "Controller 2";
+      }
+
+      app.controller("controller1", controller1);
+      app.controller("controller2", controller2);
+
+        // Viết 1 controller hiển thị ra thông tin của sinh viên và xếp loại sinh viên đó 
+        // Thông tin sv gồm: tên, tuổi, địa chỉ, điểm
+      function thongTinSV($scope) {
+        $scope.info = {
+            name: 'Tuan Anh',
+            age: '26',
+            diaChi: 'Hai Phong',
+            diem: '6'
+        }
+      }
+
+      app.controller('thongTinSV', thongTinSV);
+
+      function login($scope) {
+        // Mặc định trạng thái là false bởi vì người dùng chưa đăng nhập
+        $scope.isLogin = false; 
+
+        $scope.loginBtn = function() {
+            // Đổi trạng thái sang true bởi vì lúc này người dùng 
+            // đã nhập tài khoản  mật khẩu và ấn nút đăng nhập
+            $scope.isLogin = true;
+        }
+      }
+
+      app.controller('login', login);
+
+
+    </script>
+  </body>
+</html>
