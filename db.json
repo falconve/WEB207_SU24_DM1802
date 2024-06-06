@@ -6,14 +6,14 @@
       "id": "1"
     },
     {
-      "id": "2",
-      "name": "Áo 1",
-      "price": 123456
+      "id": "9404",
+      "name": "áo mưa",
+      "price": "99999"
     },
     {
-      "name": "áo len len",
-      "price": "1111",
-      "id": "3"
+      "id": "8920",
+      "name": "áo khoác",
+      "price": "888"
     }
   ]
 }

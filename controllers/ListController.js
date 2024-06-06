@@ -14,4 +14,14 @@ let ListController = function ($scope, $http) {
   };
 
   $scope.onGetData();
+
+  // Khai báo hàm xoá
+  $scope.onDelete = function (id, name) {
+    // PHƯƠNG THỨC DELETE để xoá
+    //http://localhost:3000/123
+    if (confirm("Ban co muon xoa khong?") == true) {
+      $http.delete(`${API_URL}/${id}`);
+      alert(`Xoa thanh cong ${name}`);
+    }
+  };
 };

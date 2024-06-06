@@ -38,17 +38,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a
-                    class="nav-link active"
-                    aria-current="page"
-                    href="./DanhSachSanPham.html"
+                  <a class="nav-link active" aria-current="page" href="#!/list"
                     >Home</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./ThemSanPham.html"
-                    >Thêm sản phẩm</a
-                  >
+                  <a class="nav-link" href="#!/add">Thêm sản phẩm</a>
                 </li>
               </ul>
             </div>
@@ -80,6 +75,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
     <!-- List Controller -->
     <script src="./controllers/ListController.js"></script>
+    <!-- Add Controller -->
+    <script src="./controllers/AddController.js"></script>
     <script>
       // Thiết lập angularjs và angular route cho ứng dụng của mình
       let app = angular.module("myApp", ["ngRoute"]);
@@ -87,7 +84,7 @@
       const API_URL = "http://localhost:3000/products";
       // Cấu hình từng route cho ứng dụng
       app.config(function ($routeProvider) {
-        // Thiết lập route /list và view tương ứng
+        // Thiết lập route /list
         $routeProvider
           .when("/list", {
             // templateUrl để gọi view tương ứng với route
@@ -97,6 +94,7 @@
           })
           .when("/add", {
             templateUrl: "./views/ThemSanPham.html",
+            controller: AddController,
           })
           .when("/detail", {
             templateUrl: "./views/ChiTietSanPham.html",
