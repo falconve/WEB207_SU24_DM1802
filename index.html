@@ -77,6 +77,10 @@
     <script src="./controllers/ListController.js"></script>
     <!-- Add Controller -->
     <script src="./controllers/AddController.js"></script>
+    <!-- Detail Controller -->
+    <script src="./controllers/DetailController.js"></script>
+    <!-- Edit Controller -->
+    <script src="./controllers/EditController.js"></script>
     <script>
       // Thiết lập angularjs và angular route cho ứng dụng của mình
       let app = angular.module("myApp", ["ngRoute"]);
@@ -96,11 +100,14 @@
             templateUrl: "./views/ThemSanPham.html",
             controller: AddController,
           })
-          .when("/detail", {
+          // thêm /:id để vào đúng id của sản phẩm
+          .when("/detail/:id", {
             templateUrl: "./views/ChiTietSanPham.html",
+            controller: DetailController,
           })
-          .when("/edit", {
+          .when("/edit/:id", {
             templateUrl: "./views/SuaSanPham.html",
+            controller: EditController,
           });
       });
     </script>
