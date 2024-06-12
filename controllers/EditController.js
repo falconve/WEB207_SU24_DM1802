@@ -13,6 +13,7 @@ let EditController = function ($scope, $http, $routeParams, $location) {
     let editItem = {
       name: $scope.editItem.name,
       price: $scope.editItem.price,
+      type: $scope.editItem.type,
     };
 
     // Phương thức PUT dùng để sửa từ cái có sẵn

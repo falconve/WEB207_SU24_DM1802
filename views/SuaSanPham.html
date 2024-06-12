@@ -28,6 +28,16 @@
       ng-model="editItem.price"
     />
   </div>
+  <label for="">Chọn loại</label>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    ng-model="editItem.type"
+  >
+    <option value="Loại 1">Loại 1</option>
+    <option value="Loại 2">Loại 2</option>
+    <option value="Loại 3">Loại 3</option>
+  </select>
   <button type="button" class="mt-3 btn btn-primary" ng-click="onEdit()">
     Sửa
   </button>

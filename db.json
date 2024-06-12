@@ -34,6 +34,35 @@
       "id": "2692",
       "name": "aads",
       "price": "100"
+    },
+    {
+      "id": "4192",
+      "name": "test loai",
+      "price": "100000"
+    },
+    {
+      "name": "test loai1",
+      "price": "100000",
+      "type": "Loại 3",
+      "id": "5420"
+    },
+    {
+      "name": "test loai2",
+      "price": "100000",
+      "type": "Loại 1",
+      "id": "1081"
+    },
+    {
+      "name": "test loai3",
+      "price": "100000",
+      "type": "Loại 2",
+      "id": "389"
+    },
+    {
+      "name": "ví dụ sản phẩm có chọn loại",
+      "price": "1000",
+      "type": "Loại 3",
+      "id": "5008"
     }
   ]
 }

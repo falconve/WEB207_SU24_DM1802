@@ -14,12 +14,6 @@ let AddController = function ($scope, $http, $location) {
     // Biến trạng thái
     let flag = false;
 
-    if (true) {
-      // chạy đoạn code nếu điều kiện là true
-    } else {
-      // chạy đoạn code nếu là false
-    }
-
     // Kiếm tra trường tên sản phẩm
     // Kiểm tra trường tên sản phẩm đc nhập vào chưa
     if (!$scope.addItem.name) {
@@ -46,7 +40,9 @@ let AddController = function ($scope, $http, $location) {
         id: Math.floor(Math.random() * 9999).toString(),
         name: $scope.addItem.name,
         price: $scope.addItem.price,
+        type: $scope.addItem.type,
       };
+      console.log(addItem);
 
       // Dùng phương thức POST để lưu dữ liệu
       $http.post(API_URL, addItem);
